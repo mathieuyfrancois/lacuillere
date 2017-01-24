@@ -1,9 +1,12 @@
+<%-- 
+    Document   : accueil
+    Created on : 24 janv. 2017, 12:52:01
+    Author     : pitit
+--%>
+
+<%@page import="Entity.Utilisateurs"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -32,9 +35,17 @@ and open the template in the editor.
                 </button>
                 <a class="navbar-brand" href="index.html"><div class="logoCuillere"></div></a>	
             </div>
+            <%
+                HttpSession currentSession = request.getSession();
+                if(currentSession.getAttribute("utilisateur") != null){
+                    Utilisateurs utilisateur = (Utilisateurs)currentSession.getAttribute("utilisateur");
+                    
+                    out.println(utilisateur.getNom()+ " " + utilisateur.getPrenom());
+                }
+            %>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" data-toggle="modal" data-target="#loginModal" onclick="clickSeConnecter()">Se Connecter</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#loginModal" onclick="clickSeConnecter()" id="statutConnexion">Se Connecter</a></li>
                 </ul>
             </div>
         </div>
@@ -148,3 +159,4 @@ and open the template in the editor.
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
     </body>
 </html>
+

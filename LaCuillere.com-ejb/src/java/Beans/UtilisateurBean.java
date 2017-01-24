@@ -37,7 +37,7 @@ public class UtilisateurBean{
         em.remove(em.merge(utilisateur));
     }
 
-    public Utilisateurs findRestaurant(Object id) {
+    public Utilisateurs findUtilisateur(Object id) {
         return em.find(Utilisateurs.class, id);
     }
     

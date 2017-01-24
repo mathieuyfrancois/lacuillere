@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app 
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+  version="3.0">
+    
+    <welcome-file-list>
+        <welcome-file>accueil.jsp</welcome-file>
+    </welcome-file-list>
+    
+    <!-- Servlet Connexion -->
+    <servlet>
+	<servlet-name>Connexion</servlet-name>
+	<servlet-class>Servlet.Connexion</servlet-class>
+    </servlet>
+    <servlet-mapping>
+            <servlet-name>Connexion</servlet-name>
+            <url-pattern>/Connexion</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Servlet Inscription -->
+    <servlet>
+	<servlet-name>Inscription</servlet-name>
+	<servlet-class>Servlet.Inscription</servlet-class>
+    </servlet>
+    <servlet-mapping>
+            <servlet-name>Inscription</servlet-name>
+            <url-pattern>/Inscription</url-pattern>
+    </servlet-mapping>
+</web-app>
