@@ -36,7 +36,7 @@ public class PlageHoraireBean{
         em.remove(em.merge(plageHoraire));
     }
 
-    public PlagesHoraires findPlageHoraire(Object id) {
+    public PlagesHoraires findPlageHoraireById(Object id) {
         return em.find(PlagesHoraires.class, id);
     }
     

@@ -37,7 +37,7 @@ public class RestaurantBean{
         em.remove(em.merge(restaurant));
     }
 
-    public Restaurants findRestaurant(Object id) {
+    public Restaurants findRestaurantById(Object id) {
         return em.find(Restaurants.class, id);
     }
     

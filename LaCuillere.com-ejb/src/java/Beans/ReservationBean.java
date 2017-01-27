@@ -37,7 +37,7 @@ public class ReservationBean{
         em.remove(em.merge(reservation));
     }
 
-    public Reservations findReservation(Object id) {
+    public Reservations findReservationById(Object id) {
         return em.find(Reservations.class, id);
     }
     

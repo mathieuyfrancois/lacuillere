@@ -12,6 +12,8 @@ import Entity.Utilisateurs;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.AESencrp;
 
 /**
  *
@@ -34,7 +37,7 @@ public class Inscription extends HttpServlet{
         PrintWriter out = response.getWriter();
         try {
             HttpSession currentSession = request.getSession();
-            /*String nom = request.getParameter("nom");
+            String nom = request.getParameter("nom");
             String prenom = request.getParameter("prenom");
             String telephone = request.getParameter("telephone");
             String numeroRue = request.getParameter("numeroRue");
@@ -44,17 +47,21 @@ public class Inscription extends HttpServlet{
             String email = request.getParameter("email");
             String pass = request.getParameter("pass");
             Utilisateurs utilisateur = new Utilisateurs();
-            utilisateur.setNom(nom);
-            utilisateur.setPrenom(prenom);
+            utilisateur.setNom(nom.toUpperCase());
+            utilisateur.setPrenom(prenom.toUpperCase());
             utilisateur.setNumeroTelephone(telephone);
             utilisateur.setEmail(email);
-            utilisateur.setMotDePasse(pass);*/
-            Utilisateurs utilisateur = new Utilisateurs();
+            
+            String password = AESencrp.encrypt(pass);
+            utilisateur.setMotDePasse(password);
+            
+            
+           /* Utilisateurs utilisateur = new Utilisateurs();
             utilisateur.setNom("Mathieu");
             utilisateur.setPrenom("dd");
             utilisateur.setNumeroTelephone("0534");
             utilisateur.setEmail("ktle@gmail.com");
-            utilisateur.setMotDePasse("blabla");
+            utilisateur.setMotDePasse("blabla");*/
             /*
             //Create Adresse
             Adresses adresse = new Adresses();
@@ -79,7 +86,9 @@ public class Inscription extends HttpServlet{
             rqD.forward(request, response);
             out.close();
         } 
-        finally {
+        catch (Exception ex) {
+            Logger.getLogger(Inscription.class.getName()).log(Level.SEVERE, null, ex);
+        }        finally {
             out.close();
         }
     }

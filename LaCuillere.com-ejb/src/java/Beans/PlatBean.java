@@ -37,7 +37,7 @@ public class PlatBean{
         em.remove(em.merge(plat));
     }
 
-    public Plats findPlat(Object id) {
+    public Plats findPlatById(Object id) {
         return em.find(Plats.class, id);
     }
     

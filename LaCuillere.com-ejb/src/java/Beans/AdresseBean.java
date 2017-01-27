@@ -36,7 +36,7 @@ public class AdresseBean{
         em.remove(em.merge(adresse));
     }
 
-    public Adresses findAdresse(Object id) {
+    public Adresses findAdresseById(Object id) {
         return em.find(Adresses.class, id);
     }
     

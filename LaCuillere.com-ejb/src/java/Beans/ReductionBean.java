@@ -38,7 +38,7 @@ public class ReductionBean{
         em.remove(em.merge(reduction));
     }
 
-    public Reductions findReduction(Object id) {
+    public Reductions findReductionById(Object id) {
         return em.find(Reductions.class, id);
     }
     

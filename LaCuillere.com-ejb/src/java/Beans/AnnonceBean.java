@@ -36,7 +36,7 @@ public class AnnonceBean{
         em.remove(em.merge(annonce));
     }
 
-    public Annonces findAnnonce(Object id) {
+    public Annonces findAnnonceById(Object id) {
         return em.find(Annonces.class, id);
     }
     

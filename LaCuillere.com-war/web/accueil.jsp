@@ -166,14 +166,14 @@
     <div id="introduction">
         <div class="container">
             <div class="row">
-                <h1>Bienvenue sur la cuillere</h1>
+                <h1 style="color:#4388CC;">Bienvenue sur la cuillere</h1>
                 <br/>
-                <h3>SLOGAN</h3>
+                <h3 style="color:#4388CC;">SLOGAN</h3>
                 <br/>
                 <form class="navbar-form inline-form">
                     <div class="form-group">
                         <input type="search" class="input-sm form-control" placeholder="Recherche">
-                        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Chercher</button>
+                        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Trouver un restaurant</button>
                     </div>
                 </form>
                 <br/>

@@ -37,7 +37,7 @@ public class CategorieBean{
         em.remove(em.merge(categorie));
     }
 
-    public Categories findCategorie(Object id) {
+    public Categories findCategorieById(Object id) {
         return em.find(Categories.class, id);
     }
     

@@ -37,8 +37,25 @@ public class UtilisateurBean{
         em.remove(em.merge(utilisateur));
     }
 
-    public Utilisateurs findUtilisateur(Object id) {
+    public Utilisateurs findUtilisateurById(Object id) {
         return em.find(Utilisateurs.class, id);
+    }
+    
+    public Utilisateurs findUtilisateur(Utilisateurs utilisateur) { 
+        try{
+            String requete = "SELECT u FROM Utilisateurs u WHERE"
+                    + " u.email = :uEmail"
+                    + " AND u.motDePasse = :uMotDePasse";
+            Query q = em.createQuery(requete); 
+            q.setParameter("uEmail", utilisateur.getEmail());
+            q.setParameter("uMotDePasse", utilisateur.getMotDePasse());
+            List<Utilisateurs> res = q.getResultList();
+            return res.size() == 0 ? null : res.get(0); 
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
     
     public List <Utilisateurs> findAllUtilisateurs(){

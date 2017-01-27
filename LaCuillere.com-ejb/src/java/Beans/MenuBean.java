@@ -38,7 +38,7 @@ public class MenuBean{
         em.remove(em.merge(menu));
     }
 
-    public Menus findMenu(Object id) {
+    public Menus findMenuById(Object id) {
         return em.find(Menus.class, id);
     }
     
