@@ -4,6 +4,7 @@
     Author     : pitit
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="Entity.Utilisateurs"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,10 +15,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="styles/lacuillere.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        
         <script src="bootstrap/js/jquery.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="javascript/lacuillere.js"></script>
+        <script src="javascript/validator.js"></script>
     </head>
     <body>
         
@@ -33,72 +37,130 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><div class="logoCuillere"></div></a>	
+                <a class="navbar-brand" href="accueil.jsp"><div class="logoCuillere"></div></a>	
             </div>
             <%
                 HttpSession currentSession = request.getSession();
                 if(currentSession.getAttribute("utilisateur") != null){
                     Utilisateurs utilisateur = (Utilisateurs)currentSession.getAttribute("utilisateur");
-                    
-                    out.println(utilisateur.getNom()+ " " + utilisateur.getPrenom());
-                }
             %>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" data-toggle="modal" data-target="#loginModal" onclick="clickSeConnecter()" id="statutConnexion">Se Connecter</a></li>
-                </ul>
-            </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown cuillere-dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><%= utilisateur.getPrenom() %>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Panier</a></li>
+                                    <li><a href="#">Mes reservations</a></li>
+                                    <li><a href="#">Mes informationz</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Deconnexion</a></li>
+                                <!--    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>-->
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+            <% } else {%>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" data-toggle="modal" data-target="#loginModal" onclick="clickSeConnecter()" id="statutConnexion">Se Connecter</a></li>
+                        </ul>
+                    </div>
+            <% } %>
+            
         </div>
     </div>
-    
-    
+        
     <!-- Modal Inscription-->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
-                <div class="loginmodal-container">
-                    <h1>Se connecter</h1><br>
-                    <form action="Connexion" method="post" id="connexionForm">
-                        <fieldset id="connexionFieldset">
-                            <input type="text" name="email" placeholder="Adresse e-mail">
-                            <input type="password" name="pass" placeholder="Mot de passe">
-                            <input type="submit" name="validerConnexion" class="login loginmodal-submit" value="Valider">
-                        </fieldset>
-                    </form>
-                    <div id="keyAndCreate">
-                        <div class="login-help">
-                              <a href="#">Mot de passe oublié ?</a>
+            <div class="loginmodal-container">
+                <h1>Se connecter</h1><br>
+                <form action="Connexion" method="post" id="connexionForm" role="form" data-toggle="validator">
+                    <fieldset id="connexionFieldset" class="modal-inputs">
+                       <div class="form-group has-feedback">
+                           <div class="input-group">
+                                <input type="email" name="email" class="form-control" id="inputEmailConnexion" placeholder="E-mail*" data-error="E-mail invalide" required>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
+                           </div>
                         </div>
-                        <hr/>
-                        <div class="create-compte">
-                            <button type="button" class="btn btn-success btn-create-compte" onclick="clickCreerCompte()">Créer un compte</button>
+                        <div class="form-group has-feedback">
+                           <div class="input-group">
+                                <input type="password" name="pass" class="form-control" id="inputPassConnexion" placeholder="Mot de passe*" required>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
+                           </div>
                         </div>
+                        <div class="form-group">
+                            <input type="submit" name="validerConnexion" class="login loginmodal-submit btn btn-primary" value="Valider">
+                        </div>
+                    </fieldset>
+                </form>
+                <div id="keyAndCreate">
+                    <div class="login-help">
+                          <a href="#">Mot de passe oublié ?</a>
                     </div>
-                    <form action="Inscription" method="post" id="inscriptionForm">
-                        <fieldset id="inscriptionFieldset">
-                            <input type="text" name="nom" placeholder="Nom*">
-                            <input type="text" name="prenom" placeholder="Prenom*">
-                            <input type="text" name="telephone" placeholder="Numero telephone">
-                            <fieldset>
-                                <legend>Adresse</legend>
-                                <input type="text" name="numeroRue" placeholder="N° rue">
-                                <input type="text" name="nomRue" placeholder="Nom rue">
-                                <input type="text" name="ville" placeholder="Ville">
-                                <input type="text" name="codePostal" placeholder="Code postal">
-                            </fieldset>
-                            <fieldset>
-                                <legend>Identifiants</legend>
-                            <input type="text" name="email" placeholder="E-mail*">
-                            <input type="text" name="email" placeholder="Confirmer votre e-mail*">
-                            <input type="password" name="pass" placeholder="Mot de passe*">
-                            <input type="password" name="pass" placeholder="Confimez votre mot de passe*">
-                            </fieldset>
-                            <input type="submit" name="validerInscription" class="login loginmodal-submit" value="Valider">
-                        <fieldset>
-                    </form>
-                    
+                    <hr/>
+                    <div class="create-compte">
+                        <button type="button" class="btn btn-success btn-create-compte" onclick="clickCreerCompte()">Créer un compte</button>
+                    </div>
                 </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
+                <form action="Inscription" method="post" id="inscriptionForm" role="form" data-toggle="validator">
+                    <fieldset id="inscriptionFieldset" class="modal-inputs">
+                        <!-- Input nom -->
+                        <div class="form-group has-feedback">
+                           <div class="input-group">
+                                <input type="text" name="nom" class="form-control" id="inputNomInscription" placeholder="Nom*" required>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
+                           </div>
+                        </div>
+                        <!-- Input prenom -->
+                        <div class="form-group has-feedback">
+                           <div class="input-group">
+                                <input type="text" name="prenom" class="form-control" id="inputPrenomInscription" placeholder="Prenom*" required>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
+                           </div>
+                        </div>
+                        <!-- Input numero telephone -->
+                        <input type="text" name="telephone" placeholder="Numero telephone">
+                        <fieldset>
+                            <legend>Adresse</legend>
+                            <input type="text" name="numeroRue" placeholder="N° rue">
+                            <input type="text" name="nomRue" placeholder="Nom rue">
+                            <input type="text" name="ville" placeholder="Ville">
+                            <input type="text" name="codePostal" placeholder="Code postal">
+                        </fieldset>
+                        <fieldset>
+                            <legend>Identifiants</legend>
+                            <div class="form-group has-feedback">
+                               <div class="input-group">
+                                    <input type="email" name="email" class="form-control" id="inputEmailInscription" placeholder="E-mail*" data-error="E-mail invalide" required>
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                    <div class="help-block with-errors"></div>
+                               </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                               <div class="input-group">
+                                    <input type="password" name="pass" class="form-control" id="inputPassInscription" placeholder="Mot de passe*" required>
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                    <div class="help-block with-errors"></div>
+                               </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            <input type="submit" name="validerInscription" class="login loginmodal-submit btn btn-primary" value="Valider">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
     
     <!-- Introduction -->
     <div id="introduction">
@@ -108,6 +170,12 @@
                 <br/>
                 <h3>SLOGAN</h3>
                 <br/>
+                <form class="navbar-form inline-form">
+                    <div class="form-group">
+                        <input type="search" class="input-sm form-control" placeholder="Recherche">
+                        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Chercher</button>
+                    </div>
+                </form>
                 <br/>
                 <div class="col-lg-12">
                 </div>
