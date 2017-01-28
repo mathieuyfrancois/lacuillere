@@ -6,8 +6,10 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,7 +56,7 @@ public class Adresses implements Serializable {
     @Size(max = 256)
     @Column(name = "code_postal")
     private String codePostal;
-    @OneToMany(mappedBy = "fkIdAdresse")
+    @OneToMany(mappedBy = "fkIdAdresse", cascade = CascadeType.PERSIST)
     private Collection<Utilisateurs> utilisateursCollection;
     @OneToMany(mappedBy = "fkIdAdresse")
     private Collection<Restaurants> restaurantsCollection;
@@ -148,5 +150,10 @@ public class Adresses implements Serializable {
     public String toString() {
         return "Entity.Adresses[ idAdresse=" + idAdresse + " ]";
     }
-    
+ 
+    public void ajouterUtilisateur(Utilisateurs user) {
+        this.utilisateursCollection = new ArrayList<>();;
+        this.utilisateursCollection.add(user);
+        user.setFkIdAdresse(this);
+    }
 }

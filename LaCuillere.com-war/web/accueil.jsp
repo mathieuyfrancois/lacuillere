@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Accueil</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -53,7 +53,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Panier</a></li>
                                     <li><a href="#">Mes reservations</a></li>
-                                    <li><a href="#">Mes informationz</a></li>
+                                    <li><a href="#">Mes informations</a></li>
                                     <li><a href="#">Something else here</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">Deconnexion</a></li>
@@ -176,9 +176,6 @@
                         <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span>Trouver un restaurant</button>
                     </div>
                 </form>
-                <br/>
-                <div class="col-lg-12">
-                </div>
             </div>
         </div>
     </div>
@@ -217,6 +214,12 @@
             </div>
         </div>
     </div>
+    
+        <!-- Introduction -->
+        <a style="text-decoration: none" href="accueilRestaurateur.jsp"><div id="banniereRestaurateur">
+        <h1>Vous avez un restaurant ?</h1>
+        <h3>Rejoignez laCuillere pour augmenter la visibilité et attirer de nouveaux clients</h3>
+        </div></a>
     
     <!-- Bootstrap core JavaScript
     ================================================== -->

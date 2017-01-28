@@ -11,6 +11,7 @@ import Entity.Adresses;
 import Entity.Utilisateurs;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +30,6 @@ import utils.AESencrp;
  */
 public class Inscription extends HttpServlet{
     @EJB
-    private UtilisateurBean utilisateurBean;
     private AdresseBean adresseBean;
     
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,34 +51,25 @@ public class Inscription extends HttpServlet{
             utilisateur.setPrenom(prenom.toUpperCase());
             utilisateur.setNumeroTelephone(telephone);
             utilisateur.setEmail(email);
+                        
+            try {
+                String password;
+                password = AESencrp.encrypt(pass);
+                utilisateur.setMotDePasse(password);
+            } catch (Exception ex) {
+                Logger.getLogger(Inscription.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
-            String password = AESencrp.encrypt(pass);
-            utilisateur.setMotDePasse(password);
-            
-            
-           /* Utilisateurs utilisateur = new Utilisateurs();
-            utilisateur.setNom("Mathieu");
-            utilisateur.setPrenom("dd");
-            utilisateur.setNumeroTelephone("0534");
-            utilisateur.setEmail("ktle@gmail.com");
-            utilisateur.setMotDePasse("blabla");*/
-            /*
             //Create Adresse
             Adresses adresse = new Adresses();
             adresse.setNumeroRue(Integer.parseInt(numeroRue));
             adresse.setNomRue(nomRue);
             adresse.setVille(ville);
             adresse.setCodePostal(codePostal);
-            //on ajoute l'adresse dans la base de données
-            adresseBean.createAdresse(adresse);
-            //List adressesList = adresseBean.findAllAdresses();
-            //trouver l'id de l'adresse pour l'ajouter à l'utilisateur
-            /*Adresse 
-            int fkIdAdresse = 
-            utilisateur.setFkIdAdresse(fkIdAdresse);*/
             
-            //on ajoute l'utilisateur dans la base de données
-            utilisateurBean.createUtilisateur(utilisateur);
+            adresse.ajouterUtilisateur(utilisateur);
+            adresseBean.createAdresse(adresse);
+                                
             //on ajoute l'utilisateur dans la session courante
             currentSession.setAttribute("utilisateur", utilisateur);
             
