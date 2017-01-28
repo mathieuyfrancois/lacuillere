@@ -34,4 +34,3 @@ function clickSeConnecter(){
     showElement('connexionFieldset');
     showElement('keyAndCreate');  
 }
-

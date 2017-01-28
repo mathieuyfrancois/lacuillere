@@ -63,7 +63,8 @@ public class Connexion extends HttpServlet{
         } 
         catch (Exception ex) {
             Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
-        }        finally {
+        }        
+        finally {
             out.close();
         }
     }

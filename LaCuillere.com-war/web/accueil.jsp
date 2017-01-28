@@ -56,7 +56,7 @@
                                     <li><a href="#">Mes informations</a></li>
                                     <li><a href="#">Something else here</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#">Deconnexion</a></li>
+                                    <li><a href="Deconnexion">Deconnexion</a></li>
                                 <!--    <li><a href="#">Separated link</a></li>
                                     <li><a href="#">One more separated link</a></li>-->
                                 </ul>
@@ -166,9 +166,9 @@
     <div id="introduction">
         <div class="container">
             <div class="row">
-                <h1 style="color:#4388CC;">Bienvenue sur la cuillere</h1>
+                <h1>Bienvenue sur la cuillere</h1>
                 <br/>
-                <h3 style="color:#4388CC;">SLOGAN</h3>
+                <h3>Découvrez & réservez les meilleurs restaurants au meilleur prix</h3>
                 <br/>
                 <form class="navbar-form inline-form">
                     <div class="form-group">
@@ -215,7 +215,7 @@
         </div>
     </div>
     
-        <!-- Introduction -->
+        <!-- Banniere restaurateur -->
         <a style="text-decoration: none" href="accueilRestaurateur.jsp"><div id="banniereRestaurateur">
         <h1>Vous avez un restaurant ?</h1>
         <h3>Rejoignez laCuillere pour augmenter la visibilité et attirer de nouveaux clients</h3>
