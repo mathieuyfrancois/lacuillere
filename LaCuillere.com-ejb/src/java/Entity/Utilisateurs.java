@@ -42,6 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Utilisateurs.findByEstClient", query = "SELECT u FROM Utilisateurs u WHERE u.estClient = :estClient")})
 public class Utilisateurs implements Serializable {
 
+    @OneToMany(mappedBy = "fkIdRestaurateur")
+    private Collection<Restaurants> restaurantsCollection;
+
     private static final long serialVersionUID = 1L;
     @Size(max = 256)
     @Column(name = "nom")
@@ -67,7 +70,7 @@ public class Utilisateurs implements Serializable {
     @Column(name = "est_client")
     private Boolean estClient;
     @JoinColumn(name = "fk_id_adresse", referencedColumnName = "id_adresse")
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Adresses fkIdAdresse;
     @OneToMany(mappedBy = "fkIdClient")
     private Collection<Reservations> reservationsCollection;
@@ -183,9 +186,24 @@ public class Utilisateurs implements Serializable {
         return true;
     }
 
+    public void ajouterRestaurant(Restaurants r) {
+        this.restaurantsCollection.add(r);
+        r.setFkIdRestaurateur(this);
+    }
+    
     @Override
     public String toString() {
         return "Entity.Utilisateurs[ idUtilisateur=" + idUtilisateur + " ]";
     }
+
+    @XmlTransient
+    public Collection<Restaurants> getRestaurantsCollection() {
+        return restaurantsCollection;
+    }
+
+    public void setRestaurantsCollection(Collection<Restaurants> restaurantsCollection) {
+        this.restaurantsCollection = restaurantsCollection;
+    }
+    
     
 }

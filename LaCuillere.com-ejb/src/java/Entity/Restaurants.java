@@ -8,6 +8,7 @@ package Entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,6 +40,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Restaurants.findByNumeroTelephone", query = "SELECT r FROM Restaurants r WHERE r.numeroTelephone = :numeroTelephone")})
 public class Restaurants implements Serializable {
 
+    @JoinColumn(name = "fk_id_restaurateur", referencedColumnName = "id_utilisateur")
+    @ManyToOne
+    private Utilisateurs fkIdRestaurateur;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,10 +65,10 @@ public class Restaurants implements Serializable {
     @OneToMany(mappedBy = "fkIdRestaurant")
     private Collection<Annonces> annoncesCollection;
     @JoinColumn(name = "fk_id_adresse", referencedColumnName = "id_adresse")
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     private Adresses fkIdAdresse;
     @JoinColumn(name = "fk_id_categorie", referencedColumnName = "id_categorie")
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     private Categories fkIdCategorie;
     @OneToMany(mappedBy = "fkIdRestaurant")
     private Collection<Menus> menusCollection;
@@ -172,6 +177,14 @@ public class Restaurants implements Serializable {
     @Override
     public String toString() {
         return "Entity.Restaurants[ idRestaurant=" + idRestaurant + " ]";
+    }
+
+    public Utilisateurs getFkIdRestaurateur() {
+        return fkIdRestaurateur;
+    }
+
+    public void setFkIdRestaurateur(Utilisateurs fkIdRestaurateur) {
+        this.fkIdRestaurateur = fkIdRestaurateur;
     }
     
 }

@@ -51,6 +51,17 @@ public class Inscription extends HttpServlet{
             utilisateur.setPrenom(prenom.toUpperCase());
             utilisateur.setNumeroTelephone(telephone);
             utilisateur.setEmail(email);
+            
+            /*
+            if(client.equals("non"))
+            {
+                utilisateur.setEstClient(FALSE);
+                
+            } else {
+                 utilisateur.setEstClient(TRUE);
+                
+            }
+            */
                         
             try {
                 String password;

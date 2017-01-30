@@ -12,6 +12,11 @@ and open the template in the editor.
     border-bottom: none;
 }
 
+.cuillere-navbar-resto{
+    background-color: green;
+    border-bottom: none;
+}
+
 .cuillere-navbar li a:link{
      color: #ffffff;
 }
@@ -29,7 +34,6 @@ and open the template in the editor.
     width: 180px;
     height: 100%;
 }
-
 #introduction {
     background: url(../images/accueil.jpg) no-repeat center top;
     margin-top: -10px;
@@ -51,6 +55,34 @@ and open the template in the editor.
     background-size: cover;
 }
 
+#introduction-resto {
+    background: url(../images/accueil_alternatif.jpeg) no-repeat center top;
+    margin-top: -10px;
+    padding-top: 20px;
+    text-align: center;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 700px;
+    width: 100%;  
+    
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#introduction-resto h1 {
+    margin-top: 150px;
+    color: green;
+    font-size: 50px;
+    font-weight: 700;
+}
+
 #introduction h1 {
     margin-top: 150px;
     color: #4388CC;
@@ -60,6 +92,14 @@ and open the template in the editor.
             
 #introduction h3 {
     color: #4388CC;
+    font-size: 30px;
+    font-weight: 100;
+    font-family: 'Raleway', sans-serif;
+    font-style: oblique;
+}
+
+#introduction-resto h3 {
+    color: green;
     font-size: 30px;
     font-weight: 100;
     font-family: 'Raleway', sans-serif;
@@ -224,6 +264,13 @@ and open the template in the editor.
     background-color: #4388CC;
 }
 
+.cuillere-dropdown-resto{
+    background-color: green;
+}
+
+.cuillere-dropdown-resto li a:link{
+     color: #000000;
+}
 .cuillere-dropdown li a:link{
      color: #000000;
 }
@@ -274,4 +321,3 @@ and open the template in the editor.
 #banniereRestaurateur a:hover{
     text-decoration: none;
 }
-

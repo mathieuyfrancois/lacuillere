@@ -103,4 +103,8 @@ public class Categories implements Serializable {
         return "Entity.Categories[ idCategorie=" + idCategorie + " ]";
     }
     
+    public void ajouterResto(Restaurants r) {
+        this.restaurantsCollection.add(r);
+        r.setFkIdCategorie(this);
+    }
 }
