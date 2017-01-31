@@ -42,15 +42,23 @@ public class Connexion extends HttpServlet{
             Utilisateurs utilisateur = new Utilisateurs();
             utilisateur.setEmail(email);
             utilisateur.setMotDePasse(password);
-            System.out.println(utilisateur);
-            
             Utilisateurs utilisateurBDD = new Utilisateurs();
+            
             if(utilisateurBean.findUtilisateur(utilisateur)!= null){
                 utilisateurBDD = utilisateurBean.findUtilisateur(utilisateur);
+                System.out.println(utilisateurBDD);
                 currentSession.setAttribute("utilisateur", utilisateurBDD);
-                RequestDispatcher rqD = request.getRequestDispatcher("accueil.jsp");
-                rqD.forward(request, response);
-                out.close();
+                
+                if(utilisateurBDD.getEstClient()){
+                    RequestDispatcher rqD = request.getRequestDispatcher("accueil.jsp");
+                    rqD.forward(request, response);
+                    out.close();
+                }
+                else{
+                    RequestDispatcher rqD = request.getRequestDispatcher("accueilRestaurateur.jsp");
+                    rqD.forward(request, response);
+                    out.close();
+                }
             }
             else{
                 //L'utilisateur n'existe pas afficher un message d'erreur
