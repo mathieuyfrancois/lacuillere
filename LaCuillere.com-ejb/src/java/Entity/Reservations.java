@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Reservations.findByDate", query = "SELECT r FROM Reservations r WHERE r.date = :date")})
 public class Reservations implements Serializable {
 
+    @Column(name = "est_validee")
+    private Boolean estValidee;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -124,6 +127,14 @@ public class Reservations implements Serializable {
     @Override
     public String toString() {
         return "Entity.Reservations[ idReservation=" + idReservation + " ]";
+    }
+
+    public Boolean getEstValidee() {
+        return estValidee;
+    }
+
+    public void setEstValidee(Boolean estValidee) {
+        this.estValidee = estValidee;
     }
     
 }

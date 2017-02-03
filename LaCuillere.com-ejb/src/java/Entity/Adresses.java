@@ -152,12 +152,13 @@ public class Adresses implements Serializable {
     }
  
     public void ajouterUtilisateur(Utilisateurs user) {
-        this.utilisateursCollection = new ArrayList<>();;
+        this.utilisateursCollection = new ArrayList<>();
         this.utilisateursCollection.add(user);
         user.setFkIdAdresse(this);
     }
     
      public void ajouterResto(Restaurants r) {
+        this.restaurantsCollection = new ArrayList<>();
         this.restaurantsCollection.add(r);
         r.setFkIdAdresse(this);
     }

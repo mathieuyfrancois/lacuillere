@@ -6,6 +6,7 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -104,6 +105,7 @@ public class Categories implements Serializable {
     }
     
     public void ajouterResto(Restaurants r) {
+        this.restaurantsCollection = new ArrayList<>();
         this.restaurantsCollection.add(r);
         r.setFkIdCategorie(this);
     }

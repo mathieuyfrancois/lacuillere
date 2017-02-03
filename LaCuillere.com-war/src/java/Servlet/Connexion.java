@@ -5,10 +5,14 @@
  */
 package Servlet;
 
+import Beans.CategorieBean;
 import Beans.UtilisateurBean;
+import Entity.Categories;
 import Entity.Utilisateurs;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +32,8 @@ import utils.AESencrp;
 public class Connexion extends HttpServlet{
     @EJB
     private UtilisateurBean utilisateurBean;
+    @EJB
+    private CategorieBean categorieBean;
     
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -46,8 +52,10 @@ public class Connexion extends HttpServlet{
             
             if(utilisateurBean.findUtilisateur(utilisateur)!= null){
                 utilisateurBDD = utilisateurBean.findUtilisateur(utilisateur);
-                System.out.println(utilisateurBDD);
+                
                 currentSession.setAttribute("utilisateur", utilisateurBDD);
+                
+                categoriesToSession(currentSession);
                 
                 if(utilisateurBDD.getEstClient()){
                     RequestDispatcher rqD = request.getRequestDispatcher("accueil.jsp");
@@ -75,5 +83,13 @@ public class Connexion extends HttpServlet{
         finally {
             out.close();
         }
+    }
+    
+    private void categoriesToSession(HttpSession currentSession){
+        ArrayList<Categories> categoriesList = new ArrayList<Categories>();
+        for(Categories categorie : categorieBean.findAllCategories()){
+            categoriesList.add(categorie);
+        }
+        currentSession.setAttribute("categoriesList", categoriesList);
     }
 }

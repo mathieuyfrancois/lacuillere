@@ -15,22 +15,28 @@ import Entity.Restaurants;
 import Entity.Utilisateurs;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
-import java.io.*;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author anto
  */
+@MultipartConfig
+@WebServlet("/CreerRestaurant")
 public class CreerRestaurant extends HttpServlet {
     @EJB
     private AdresseBean adresseBean;
@@ -40,11 +46,7 @@ public class CreerRestaurant extends HttpServlet {
     
     @EJB
     private CategorieBean categorieBean;
-    
-    private boolean isMultipart;
-    File file ;
-    int maxFileSize = 5000 * 1024;
-    int maxMemSize = 5000 * 1024;
+
     private String filePath = "C:\\Users\\pitit\\Documents\\NetBeansProjects\\LaCuillere.com\\LaCuillere.com-war\\web\\images\\restaurants\\";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -98,9 +100,12 @@ public class CreerRestaurant extends HttpServlet {
             String email = request.getParameter("email");
             Integer idCategorie = Integer.parseInt(request.getParameter("categorie"));
             Categories categorie = categorieBean.findCategorieById(idCategorie);
-            String imageRestaurant = request.getParameter("imageRestaurant");
             
-            isMultipart = ServletFileUpload.isMultipartContent(request);
+            File uploads = new File(filePath);
+            Part filePart = request.getPart("imageRestaurant");
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+            InputStream fileContent = filePart.getInputStream();
+            Files.copy(fileContent, uploads.toPath());
             
             Integer num= Integer.parseInt(numeroRue);
             Restaurants restaurant = new Restaurants();

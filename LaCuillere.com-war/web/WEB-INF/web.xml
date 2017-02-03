@@ -38,4 +38,14 @@
             <servlet-name>Deconnexion</servlet-name>
             <url-pattern>/Deconnexion</url-pattern>
     </servlet-mapping>
+    
+    <!-- Servlet CreerRestaurant -->
+    <servlet>
+	<servlet-name>CreerRestaurant</servlet-name>
+	<servlet-class>Servlet.CreerRestaurant</servlet-class>
+    </servlet>
+    <servlet-mapping>
+            <servlet-name>CreerRestaurant</servlet-name>
+            <url-pattern>/CreerRestaurant</url-pattern>
+    </servlet-mapping>
 </web-app>

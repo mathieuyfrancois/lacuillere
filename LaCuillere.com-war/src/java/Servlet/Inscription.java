@@ -32,6 +32,9 @@ public class Inscription extends HttpServlet{
     @EJB
     private AdresseBean adresseBean;
     
+    @EJB
+    private UtilisateurBean utilisateurBean;
+    
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -44,6 +47,7 @@ public class Inscription extends HttpServlet{
             String nomRue = request.getParameter("nomRue");
             String ville = request.getParameter("ville");
             String codePostal = request.getParameter("codePostal");
+            String client = request.getParameter("client");
             String email = request.getParameter("email");
             String pass = request.getParameter("pass");
             Utilisateurs utilisateur = new Utilisateurs();
@@ -52,41 +56,46 @@ public class Inscription extends HttpServlet{
             utilisateur.setNumeroTelephone(telephone);
             utilisateur.setEmail(email);
             
-            /*
             if(client.equals("non"))
             {
-                utilisateur.setEstClient(FALSE);
-                
+                utilisateur.setEstClient(false);
             } else {
-                 utilisateur.setEstClient(TRUE);
-                
+                 utilisateur.setEstClient(true);
             }
-            */
                         
             try {
                 String password;
                 password = AESencrp.encrypt(pass);
                 utilisateur.setMotDePasse(password);
+                
+                //Create Adresse
+                Adresses adresse = new Adresses();
+                adresse.setNumeroRue(Integer.parseInt(numeroRue));
+                adresse.setNomRue(nomRue);
+                adresse.setVille(ville);
+                adresse.setCodePostal(codePostal);
+
+                adresse.ajouterUtilisateur(utilisateur);
+                adresseBean.createAdresse(adresse);
+
+                //on ajoute l'utilisateur dans la session courante
+                Utilisateurs utilisateurBdd = utilisateurBean.findUtilisateur(utilisateur);
+                currentSession.setAttribute("utilisateur", utilisateurBdd);
+
+                if(client.equals("non"))
+                {
+                    RequestDispatcher rqD = request.getRequestDispatcher("accueilRestaurateur.jsp");
+                    rqD.forward(request, response);
+                    out.close();
+
+                } else {
+                    RequestDispatcher rqD = request.getRequestDispatcher("accueil.jsp");
+                    rqD.forward(request, response);
+                    out.close();
+                }
             } catch (Exception ex) {
                 Logger.getLogger(Inscription.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            //Create Adresse
-            Adresses adresse = new Adresses();
-            adresse.setNumeroRue(Integer.parseInt(numeroRue));
-            adresse.setNomRue(nomRue);
-            adresse.setVille(ville);
-            adresse.setCodePostal(codePostal);
-            
-            adresse.ajouterUtilisateur(utilisateur);
-            adresseBean.createAdresse(adresse);
-                                
-            //on ajoute l'utilisateur dans la session courante
-            currentSession.setAttribute("utilisateur", utilisateur);
-            
-            RequestDispatcher rqD = request.getRequestDispatcher("accueil.jsp");
-            rqD.forward(request, response);
-            out.close();
         } 
         catch (Exception ex) {
             Logger.getLogger(Inscription.class.getName()).log(Level.SEVERE, null, ex);

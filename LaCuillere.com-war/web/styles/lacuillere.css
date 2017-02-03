@@ -321,3 +321,24 @@ and open the template in the editor.
 #banniereRestaurateur a:hover{
     text-decoration: none;
 }
+
+.btn-accueil{
+    padding: 10px 30px;
+    font-size: 14px;
+}
+
+.barre-recherche{
+    background-color: #ffffff;
+}
+
+.barre-recherche input[type=text], input[type=date], input[type=time], input[type=number]{
+    border: none;
+}
+
+.liste-restaurants h2{
+    text-align: center;
+}
+
+ul.liste-restaurants {
+    list-style-type: none;
+}

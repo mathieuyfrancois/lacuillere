@@ -34,3 +34,8 @@ function clickSeConnecter(){
     showElement('connexionFieldset');
     showElement('keyAndCreate');  
 }
+
+function clickAjoutRestaurant(){
+    resetForm('ajouterRestaurantForm');
+    showElement('ajouterRestaurantFieldset');
+}
