@@ -56,9 +56,9 @@ public class Adresses implements Serializable {
     @Size(max = 256)
     @Column(name = "code_postal")
     private String codePostal;
-    @OneToMany(mappedBy = "fkIdAdresse", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fkIdAdresse", cascade = CascadeType.PERSIST)
     private Collection<Utilisateurs> utilisateursCollection;
-    @OneToMany(mappedBy = "fkIdAdresse", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fkIdAdresse", cascade = CascadeType.PERSIST)
     private Collection<Restaurants> restaurantsCollection;
 
     public Adresses() {

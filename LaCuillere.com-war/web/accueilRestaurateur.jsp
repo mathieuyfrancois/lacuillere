@@ -236,12 +236,14 @@
                 if(!utilisateur.getRestaurantsCollection().isEmpty()){
                     Collection<Restaurants> restaurantsCollection = (Collection<Restaurants>)utilisateur.getRestaurantsCollection();
         %>
-                <div class="liste-restaurants">
-                <h2 id="mesRestaurants">Mes Restaurants</h2>
+                
+                    <h2 id="mesRestaurants">Mes Restaurants</h2>
+                    <div class="liste-restaurants">
+                    <ul>
         <%
-                    for(Restaurants restaurant : restaurantsCollection){
+                        for(Restaurants restaurant : restaurantsCollection){
             %>
-                        <ul>
+                        
                             <li>
                                 <div class="image-restaurant"><a target="_blank" href=""><img src=""/></a></div>
                                 <div class="information-restaurant">
@@ -255,9 +257,10 @@
                                 </div>
                                 <div class="note-restaurant"></div>
                             </li>
-                        </ul>
-                    </div>
-            <%      } 
+            <%      } %>
+                    </ul>
+                </div>
+            <%
                 }
             }
         %>

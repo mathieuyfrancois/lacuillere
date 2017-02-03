@@ -7,6 +7,7 @@ package Beans;
 
 
 import Entity.Restaurants;
+import Entity.Utilisateurs;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -43,6 +44,22 @@ public class RestaurantBean{
     
     public List <Restaurants> findAllRestaurants(){
        return em.createQuery("SELECT r FROM Restaurants r").getResultList();
+    }
+    
+    public List <Restaurants> findRestaurants(String recherche) { 
+        try{
+            String requete = "SELECT r FROM Restaurants r"
+                    + " LEFT JOIN Adresses a ON (r.fkIdAdresse = a)"
+                    + " LEFT JOIN Categories c ON (r.fkIdCategorie = c)"
+                    + " WHERE upper(r.nom) LIKE :recherche OR upper(a.ville) LIKE :recherche OR upper(c.intitule) LIKE :recherche";
+            Query q = em.createQuery(requete); 
+            q.setParameter("recherche", "%" + recherche.toUpperCase() + "%");
+            return q.getResultList(); 
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
     
 }

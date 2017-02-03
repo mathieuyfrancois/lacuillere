@@ -171,12 +171,9 @@
                     <br/>
                     <h3>Découvrez & réservez les meilleurs restaurants au meilleur prix</h3>
                     <br/>
-                    <form class="navbar-form inline-form" action="RechercheRestaurant">
+                    <form class="navbar-form inline-form" action="RechercherRestaurant" method="post">
                         <div class="form-group barre-recherche">
-                            <input type="text" class="form-control" name="recherche" placeholder="Adresse, quartier, restaurant">
-                            <input type="date" class="form-control" name="date" placeholder="Date">
-                            <input type="time" class="form-control" name="heure" placeholder="Heure">
-                            <input type="number" name="nombrePersonne" value="2" min="0" max="50">
+                            <input type="text" class="form-control" name="recherche" placeholder="Restaurant,Catégorie">
                             <button type="submit" class="btn btn-primary btn-sm btn-accueil">TROUVER UN RESTAURANT</button>
                         </div>
                     </form>
@@ -198,22 +195,18 @@
                     <div class="col-md-3 col-sm-6 service">
                         <img src="images/hamburger.jpeg" width="200" height="150"/>
                         <h4>Restaurant 1</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                     </div>
                     <div class="col-md-3 col-sm-6 service">
                         <img src="images/pates.jpeg" width="200" height="150"/>
                         <h4>Restaurant 2</h4>
-                        <p> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                     </div>
                     <div class="col-md-3 col-sm-6 service">
                         <img src="images/plat.jpeg" width="200" height="150"/>
                         <h4>Restaurant 3</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                     </div>
                     <div class="col-md-3 col-sm-6 service">
                         <img src="images/plat_02.jpeg" width="200" height="150"/>
                         <h4>Restaurant 4</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                     </div>
                 </div>
             </div>

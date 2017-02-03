@@ -4,6 +4,7 @@
     Author     : pitit
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Collection"%>
 <%@page import="Entity.Restaurants"%>
 <%@page import="Entity.Utilisateurs"%>
@@ -19,40 +20,38 @@
             Integer idRestaurant = Integer.parseInt(request.getParameter("idRestaurant"));
             if(currentSession.getAttribute("utilisateur") != null){
                 Utilisateurs utilisateur = (Utilisateurs)currentSession.getAttribute("utilisateur");
-                Collection<Restaurants> restaurantsCollection = (Collection<Restaurants>)utilisateur.getRestaurantsCollection();
-                for(Restaurants restaurant : restaurantsCollection){
-                    if(restaurant.getIdRestaurant().equals(idRestaurant)){
-                        Restaurants restaurantChoisi = restaurant;
-        %>
-                        <h1><% out.print(restaurantChoisi.getNom()); %></h1>
-                        <%
+                if(utilisateur.getEstClient()){
+                    if(currentSession.getAttribute("listeRestaurants") != null){
+                      ArrayList<Restaurants> listeRestaurants = (ArrayList<Restaurants>)currentSession.getAttribute("listeRestaurants");
+                      for(Restaurants restaurant : listeRestaurants){
+                          if(restaurant.getIdRestaurant().equals(idRestaurant)){
+                            Restaurants restaurantChoisi = restaurant;
+                            %>
+                                <h1 id="#mesRestaurants"><% out.print(restaurantChoisi.getNom()); %></h1>
+                                <div><% out.print(restaurantChoisi.getFkIdAdresse().getNumeroRue()+" "+ restaurantChoisi.getFkIdAdresse().getNomRue()+ " "+ restaurantChoisi.getFkIdAdresse().getCodePostal()+ " "+ restaurantChoisi.getFkIdAdresse().getVille()); %></div>
+                                <div><% out.print(restaurantChoisi.getFkIdCategorie().getIntitule()); %></div>
+                                <div>
+                                    <button type="button">Reserver une table</button>
+                                </div>
+                            <%
+                          }
+                      }
                     }
                 }
-                if(utilisateur.getEstClient()){
-                    
-                    %>
-                   
-                    <%
-                }
-                else { %>
-                    <ul>
-                        <li>
-                            <div class="menus-restaurant">
-                                <h3 class="titre-restaurant"><a target="_blank" href="informationsRestaurant.jsp?idRestaurant=<%  out.print(restaurant.getIdRestaurant()); %>"><% out.print(restaurant.getNom()); %></a></h3>
-                                <div class="categorie-restaurant">
-                                    <% out.print(""); %>
-                                </div>
-                                <div class="adresse-restaurant">
-                                    <% out.print(""); %>
-                                </div>
-                            </div>
-                            <div class="note-restaurant"></div>
-                        </li>
-                    </ul>
-                <%
+                else{
+                    Collection<Restaurants> restaurantsCollection = (Collection<Restaurants>)utilisateur.getRestaurantsCollection();
+                    for(Restaurants restaurant : restaurantsCollection){
+                        if(restaurant.getIdRestaurant().equals(idRestaurant)){
+                            Restaurants restaurantChoisi = restaurant;
+            %>
+                            <h1 id="#mesRestaurants"><% out.print(restaurantChoisi.getNom()); %></h1>
+                                <div><% out.print(restaurantChoisi.getFkIdAdresse().getNumeroRue()+" "+ restaurantChoisi.getFkIdAdresse().getNomRue()+ " "+ restaurantChoisi.getFkIdAdresse().getCodePostal()+ " "+ restaurantChoisi.getFkIdAdresse().getVille()); %></div>
+                                <div><% out.print(restaurantChoisi.getFkIdCategorie().getIntitule()); %></div>
+            <%
+                        }
+                    }
                 }
             }
         %>
-        
     </body>
 </html>

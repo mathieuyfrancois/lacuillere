@@ -58,4 +58,14 @@
             <servlet-name>ModificationInformationsUtilisateur</servlet-name>
             <url-pattern>/ModificationInformationsUtilisateur</url-pattern>
     </servlet-mapping>
+    
+    <!-- Servlet ModificationInformationUtilisateur -->
+    <servlet>
+	<servlet-name>RechercherRestaurant</servlet-name>
+	<servlet-class>Servlet.RechercherRestaurant</servlet-class>
+    </servlet>
+    <servlet-mapping>
+            <servlet-name>RechercherRestaurant</servlet-name>
+            <url-pattern>/RechercherRestaurant</url-pattern>
+    </servlet-mapping>
 </web-app>

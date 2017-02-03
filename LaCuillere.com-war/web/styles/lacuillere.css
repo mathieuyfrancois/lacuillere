@@ -336,12 +336,24 @@ and open the template in the editor.
     border: none;
 }
 
-.liste-restaurants h2{
+.liste-restaurants{
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#mesRestaurants{
     text-align: center;
 }
 
 .liste-restaurants ul{
     list-style-type: none;
+}
+
+.liste-restaurants li{
+    padding: 10px;
+    border: 1px solid black;
+    margin: 10px;
 }
 
 .mes-informations{
