@@ -233,7 +233,7 @@ and open the template in the editor.
     width: 100%
 }
 
-.modal-inputs input[type=email], input[type=password] {
+.modal-inputs input[type=email], input[type=password], input[type=text] {
   height: 44px;
   font-size: 16px;
   width: 100%;
@@ -248,7 +248,7 @@ and open the template in the editor.
   -moz-box-sizing: border-box;
 }
 
-.modal-inputs input[type=email]:hover, input[type=password]:hover {
+.modal-inputs input[type=email]:hover, input[type=password]:hover, input[type=text]:hover {
   border: 1px solid #b9b9b9;
   border-top: 1px solid #a0a0a0;
   -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
@@ -302,6 +302,7 @@ and open the template in the editor.
     background-size: contain;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
 }
 
 #banniereRestaurateur h1 {
@@ -339,6 +340,19 @@ and open the template in the editor.
     text-align: center;
 }
 
-ul.liste-restaurants {
+.liste-restaurants ul{
     list-style-type: none;
+}
+
+.mes-informations{
+    background-color: #F3F4F5;
+    padding: 60px;
+    
+}
+
+.divButton{
+    text-align: center;
+}
+.buttonModification{
+    width: 50%
 }

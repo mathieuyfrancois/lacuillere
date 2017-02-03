@@ -53,8 +53,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Panier</a></li>
                                         <li><a href="#">Mes reservations</a></li>
-                                        <li><a href="#">Mes informations</a></li>
-                                        <li><a href="#">Something else here</a></li>
+                                        <li><a href="informationsUtilisateur.jsp">Mes informations</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="Deconnexion">Deconnexion</a></li>
                                     <!--    <li><a href="#">Separated link</a></li>
@@ -172,7 +171,7 @@
                     <br/>
                     <h3>Découvrez & réservez les meilleurs restaurants au meilleur prix</h3>
                     <br/>
-                    <form class="navbar-form inline-form">
+                    <form class="navbar-form inline-form" action="RechercheRestaurant">
                         <div class="form-group barre-recherche">
                             <input type="text" class="form-control" name="recherche" placeholder="Adresse, quartier, restaurant">
                             <input type="date" class="form-control" name="date" placeholder="Date">
@@ -220,11 +219,11 @@
             </div>
         </div>
 
-            <!-- Banniere restaurateur -->
-            <a style="text-decoration: none" href="accueilRestaurateur.jsp"><div id="banniereRestaurateur">
-            <h1>Vous avez un restaurant ?</h1>
-            <h3>Rejoignez laCuillere pour augmenter la visibilité et attirer de nouveaux clients</h3>
-            </div></a>
+        <!-- Banniere restaurateur -->
+        <a style="text-decoration: none" href="accueilRestaurateur.jsp"><div id="banniereRestaurateur">
+        <h1>Vous avez un restaurant ?</h1>
+        <h3>Rejoignez laCuillere pour augmenter la visibilité et attirer de nouveaux clients</h3>
+        </div></a>
 
         <!-- Bootstrap core JavaScript
         ================================================== -->

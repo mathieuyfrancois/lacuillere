@@ -48,4 +48,14 @@
             <servlet-name>CreerRestaurant</servlet-name>
             <url-pattern>/CreerRestaurant</url-pattern>
     </servlet-mapping>
+    
+    <!-- Servlet ModificationInformationUtilisateur -->
+    <servlet>
+	<servlet-name>ModificationInformationsUtilisateur</servlet-name>
+	<servlet-class>Servlet.ModificationInformationsUtilisateur</servlet-class>
+    </servlet>
+    <servlet-mapping>
+            <servlet-name>ModificationInformationsUtilisateur</servlet-name>
+            <url-pattern>/ModificationInformationsUtilisateur</url-pattern>
+    </servlet-mapping>
 </web-app>

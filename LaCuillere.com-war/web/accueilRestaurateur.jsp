@@ -60,8 +60,7 @@
                                             <a a href="#" data-toggle="modal" data-target="#restoModal" onclick="clickAjoutRestaurant()" >Ajouter mon restaurant</a>
                                         </li>
                                         <li> <a a href="#mesRestaurants" data-toggle="modal" data-target="#"> Gérer mes restaurants </a></li>
-                                        <li><a href="#">Mes informations</a></li>
-                                        <li><a href="#">Something else here</a></li>
+                                        <li><a href="informationsUtilisateur.jsp">Mes informations</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="Deconnexion">Deconnexion</a></li>
                                     <!--    <li><a href="#">Separated link</a></li>
@@ -234,30 +233,33 @@
             if(currentSession.getAttribute("utilisateur") != null){
                 ArrayList<Categories> categoriesList = (ArrayList<Categories>)currentSession.getAttribute("categoriesList");
                 Utilisateurs utilisateur = (Utilisateurs)currentSession.getAttribute("utilisateur");
-                Collection<Restaurants> restaurantsCollection = (Collection<Restaurants>)utilisateur.getRestaurantsCollection();
+                if(!utilisateur.getRestaurantsCollection().isEmpty()){
+                    Collection<Restaurants> restaurantsCollection = (Collection<Restaurants>)utilisateur.getRestaurantsCollection();
         %>
                 <div class="liste-restaurants">
                 <h2 id="mesRestaurants">Mes Restaurants</h2>
         <%
-                for(Restaurants restaurant : restaurantsCollection){
+                    for(Restaurants restaurant : restaurantsCollection){
+            %>
+                        <ul>
+                            <li>
+                                <div class="image-restaurant"><a target="_blank" href=""><img src=""/></a></div>
+                                <div class="information-restaurant">
+                                    <h3 class="titre-restaurant"><a target="_blank" href="informationsRestaurant.jsp?idRestaurant=<%  out.print(restaurant.getIdRestaurant()); %>"><% out.print(restaurant.getNom()); %></a></h3>
+                                    <div class="categorie-restaurant">
+                                        <% out.print(restaurant.getFkIdCategorie().getIntitule()); %>
+                                    </div>
+                                    <div class="adresse-restaurant">
+                                        <% out.print(restaurant.getFkIdAdresse().getNumeroRue() + " " + restaurant.getFkIdAdresse().getNomRue() + " " + restaurant.getFkIdAdresse().getCodePostal()+ " " + restaurant.getFkIdAdresse().getVille()); %>
+                                    </div>
+                                </div>
+                                <div class="note-restaurant"></div>
+                            </li>
+                        </ul>
+                    </div>
+            <%      } 
+                }
+            }
         %>
-                    <ul>
-                        <li>
-                            <div class="image-restaurant"><a target="_blank" href=""><img src=""/></a></div>
-                            <div class="information-restaurant">
-                                <h3 class="titre-restaurant"><a target="_blank" href=""><% out.print(restaurant.getNom()); %></a></h3>
-                                <div class="categorie-restaurant">
-                                    <% out.print(restaurant.getFkIdCategorie().getIntitule()); %>
-                                </div>
-                                <div class="adresse-restaurant">
-                                    <% out.print(restaurant.getFkIdAdresse().getNumeroRue() + " " + restaurant.getFkIdAdresse().getNomRue() + " " + restaurant.getFkIdAdresse().getCodePostal()+ " " + restaurant.getFkIdAdresse().getVille()); %>
-                                </div>
-                            </div>
-                            <div class="note-restaurant"></div>
-                        </li>
-                    </ul>
-                </div>
-        <%      } 
-            }%>
     </body>
 </html>

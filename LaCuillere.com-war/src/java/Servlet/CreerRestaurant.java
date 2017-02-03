@@ -36,7 +36,6 @@ import javax.servlet.http.Part;
  * @author anto
  */
 @MultipartConfig
-@WebServlet("/CreerRestaurant")
 public class CreerRestaurant extends HttpServlet {
     @EJB
     private AdresseBean adresseBean;
@@ -105,7 +104,12 @@ public class CreerRestaurant extends HttpServlet {
             Part filePart = request.getPart("imageRestaurant");
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
             InputStream fileContent = filePart.getInputStream();
-            Files.copy(fileContent, uploads.toPath());
+            
+            try {
+                Files.copy(fileContent, uploads.toPath());
+            } catch (java.nio.file.AccessDeniedException e) {
+                System.out.println("access denied");
+            }
             
             Integer num= Integer.parseInt(numeroRue);
             Restaurants restaurant = new Restaurants();
