@@ -68,4 +68,14 @@
             <servlet-name>RechercherRestaurant</servlet-name>
             <url-pattern>/RechercherRestaurant</url-pattern>
     </servlet-mapping>
+    
+    <!-- Servlet AjouterMenu -->
+    <servlet>
+	<servlet-name>AjouterMenu</servlet-name>
+	<servlet-class>Servlet.AjouterMenu</servlet-class>
+    </servlet>
+    <servlet-mapping>
+            <servlet-name>AjouterMenu</servlet-name>
+            <url-pattern>/AjouterMenu</url-pattern>
+    </servlet-mapping>
 </web-app>

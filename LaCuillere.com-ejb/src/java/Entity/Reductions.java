@@ -6,6 +6,7 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -101,4 +102,9 @@ public class Reductions implements Serializable {
         return "Entity.Reductions[ idReduction=" + idReduction + " ]";
     }
     
+    public void ajouterMenu(Menus menu) {
+        this.menusCollection = new ArrayList<>();
+        this.menusCollection.add(menu);
+        menu.setFkIdReduction(this);
+    }
 }

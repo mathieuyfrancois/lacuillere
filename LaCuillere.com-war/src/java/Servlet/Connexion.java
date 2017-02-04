@@ -6,8 +6,10 @@
 package Servlet;
 
 import Beans.CategorieBean;
+import Beans.ReductionBean;
 import Beans.UtilisateurBean;
 import Entity.Categories;
+import Entity.Reductions;
 import Entity.Utilisateurs;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,6 +36,8 @@ public class Connexion extends HttpServlet{
     private UtilisateurBean utilisateurBean;
     @EJB
     private CategorieBean categorieBean;
+    @EJB
+    private ReductionBean reductionBean;
     
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -56,6 +60,7 @@ public class Connexion extends HttpServlet{
                 currentSession.setAttribute("utilisateur", utilisateurBDD);
                 
                 categoriesToSession(currentSession);
+                reductionsToSession(currentSession);
                 
                 if(utilisateurBDD.getEstClient()){
                     RequestDispatcher rqD = request.getRequestDispatcher("accueil.jsp");
@@ -91,5 +96,13 @@ public class Connexion extends HttpServlet{
             categoriesList.add(categorie);
         }
         currentSession.setAttribute("categoriesList", categoriesList);
+    }
+    
+    private void reductionsToSession(HttpSession currentSession){
+        ArrayList<Reductions> reductionsList = new ArrayList<Reductions>();
+        for(Reductions reduction : reductionBean.findAllReductions()){
+            reductionsList.add(reduction);
+        }
+        currentSession.setAttribute("reductionsList", reductionsList);
     }
 }

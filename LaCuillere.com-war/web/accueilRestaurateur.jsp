@@ -57,7 +57,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Annonces</a></li>
                                         <li>  
-                                            <a a href="#" data-toggle="modal" data-target="#restoModal" onclick="clickAjoutRestaurant()" >Ajouter mon restaurant</a>
+                                            <a a href="#" data-toggle="modal" data-target="#restoModal" onclick="clickAjoutRestaurant()" >Ajouter un restaurant</a>
                                         </li>
                                         <li> <a a href="#mesRestaurants" data-toggle="modal" data-target="#"> Gérer mes restaurants </a></li>
                                         <li><a href="informationsUtilisateur.jsp">Mes informations</a></li>
@@ -200,7 +200,7 @@
                                 <input type="text" name="ville" placeholder="Ville">
                                 <input type="text" name="codePostal" placeholder="Code postal">
                             </fieldset>
-                            <select class="selectpicker" title="Catégorie" name="categorie">
+                            <select class="selectpicker form-control" title="Catégorie" name="categorie">
                                 <%
                                     if(currentSession.getAttribute("utilisateur") != null){
                                         ArrayList<Categories> categoriesList = (ArrayList<Categories>)currentSession.getAttribute("categoriesList");
@@ -245,17 +245,19 @@
             %>
                         
                             <li>
-                                <div class="image-restaurant"><a target="_blank" href=""><img src=""/></a></div>
-                                <div class="information-restaurant">
-                                    <h3 class="titre-restaurant"><a target="_blank" href="informationsRestaurant.jsp?idRestaurant=<%  out.print(restaurant.getIdRestaurant()); %>"><% out.print(restaurant.getNom()); %></a></h3>
-                                    <div class="categorie-restaurant">
-                                        <% out.print(restaurant.getFkIdCategorie().getIntitule()); %>
-                                    </div>
-                                    <div class="adresse-restaurant">
-                                        <% out.print(restaurant.getFkIdAdresse().getNumeroRue() + " " + restaurant.getFkIdAdresse().getNomRue() + " " + restaurant.getFkIdAdresse().getCodePostal()+ " " + restaurant.getFkIdAdresse().getVille()); %>
+                                <h3 class="titre-restaurant"><a target="_blank" href="informationsRestaurant.jsp?idRestaurant=<%  out.print(restaurant.getIdRestaurant()); %>"><% out.print(restaurant.getNom()); %></a></h3>
+                                <div class="restaurant">
+                                    <div class="image-restaurant"><a target="_blank" href=""><img src=""/></a></div>
+                                    <div class="information-restaurant">
+                                        <div class="categorie-restaurant">
+                                            <% out.print(restaurant.getFkIdCategorie().getIntitule()); %>
+                                        </div>
+                                        <div class="adresse-restaurant">
+                                            <% out.print(restaurant.getFkIdAdresse().getNumeroRue() + " " + restaurant.getFkIdAdresse().getNomRue() + " " + restaurant.getFkIdAdresse().getCodePostal()+ " " + restaurant.getFkIdAdresse().getVille()); %>
+                                        </div>
+                                        <div class="note-restaurant"></div>
                                     </div>
                                 </div>
-                                <div class="note-restaurant"></div>
                             </li>
             <%      } %>
                     </ul>

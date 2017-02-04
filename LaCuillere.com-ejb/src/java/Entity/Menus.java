@@ -6,8 +6,10 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,10 +54,10 @@ public class Menus implements Serializable {
     @OneToMany(mappedBy = "fkIdMenu")
     private Collection<PlatsMenus> platsMenusCollection;
     @JoinColumn(name = "fk_id_reduction", referencedColumnName = "id_reduction")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Reductions fkIdReduction;
     @JoinColumn(name = "fk_id_restaurant", referencedColumnName = "id_restaurant")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Restaurants fkIdRestaurant;
     @OneToMany(mappedBy = "fkIdMenu")
     private Collection<MenusAnnonces> menusAnnoncesCollection;

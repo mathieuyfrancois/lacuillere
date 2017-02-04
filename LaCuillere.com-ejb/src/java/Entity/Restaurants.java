@@ -6,6 +6,7 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -185,6 +186,12 @@ public class Restaurants implements Serializable {
 
     public void setFkIdRestaurateur(Utilisateurs fkIdRestaurateur) {
         this.fkIdRestaurateur = fkIdRestaurateur;
+    }
+ 
+    public void ajouterMenu(Menus menu) {
+        this.menusCollection = new ArrayList<>();
+        this.menusCollection.add(menu);
+        menu.setFkIdRestaurant(this);
     }
     
 }
